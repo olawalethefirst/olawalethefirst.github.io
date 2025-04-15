@@ -71,14 +71,32 @@
         .hamburger {
             display: none;
             cursor: pointer;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            z-index: 1001;
         }
         
         .hamburger div {
             width: 25px;
             height: 3px;
             background-color: #555;
-            margin: 5px;
+            margin: 5px 0;
             transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        /* Hamburger Menu Animation */
+        .hamburger.active .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active .line2 {
+            opacity: 0;
+        }
+        
+        .hamburger.active .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
         
         /* Hero section */
@@ -139,6 +157,8 @@
         .hero-image img {
             max-width: 100%;
             height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
         /* Features section */
@@ -476,7 +496,11 @@
         const navLinks = document.querySelector('.nav-links');
         
         hamburger.addEventListener('click', () => {
+            // Toggle menu visibility
             navLinks.classList.toggle('active');
+            
+            // Toggle hamburger animation
+            hamburger.classList.toggle('active');
         });
         
         // Close mobile menu when clicking a link
@@ -484,6 +508,7 @@
         links.forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                hamburger.classList.remove('active'); // Reset hamburger icon
             });
         });
         
